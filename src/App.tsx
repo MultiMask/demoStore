@@ -1,22 +1,31 @@
 import * as React from "react";
-import "./App.css";
+import { Provider } from "react-redux";
+import { applyMiddleware, createStore, Store } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
+import HomePages from "./pages/HomePages";
+import rootReducer, { IRootState } from "./reducers";
 
-import logo from "./logo.svg";
+let middleware = applyMiddleware(thunk);
 
-class App extends React.Component {
+if (process.env.NODE_ENV === "development") {
+  middleware = composeWithDevTools(middleware);
+}
+
+const store = createStore(rootReducer, {}, middleware) as Store<IRootState>;
+
+class Root extends React.Component {
+  public state = {
+    mobileOpen: true
+  };
+
   public render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
+      <Provider store={store}>
+        <HomePages />
+      </Provider>
     );
   }
 }
 
-export default App;
+export default Root;
