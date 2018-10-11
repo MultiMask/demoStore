@@ -1,12 +1,14 @@
 import { connectRouter, routerMiddleware } from "connected-react-router";
 import { ConnectedRouter } from "connected-react-router";
+import { ThemeProvider } from "emotion-theming";
 import { createBrowserHistory } from "history";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { applyMiddleware, compose, createStore } from "redux";
+import { theme } from "./config/emotion";
 import rootReducer from "./reducers";
-import Routes from "./Routes";
+import Routes from "./routes";
 
 const history = createBrowserHistory();
 
@@ -21,7 +23,9 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Routes />
+      <ThemeProvider theme={theme}>
+        <Routes />
+      </ThemeProvider>
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root") as HTMLElement

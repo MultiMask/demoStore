@@ -4,9 +4,12 @@
   "private": true,
   "dependencies": {
     "connected-react-router": "^4.5.0",
+    "emotion": "^9.2.12",
+    "emotion-theming": "^9.2.9",
     "history": "^4.7.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-emotion": "^9.2.12",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
