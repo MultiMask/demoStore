@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import { applyMiddleware, createStore, Store } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import HomePages from "./pages/HomePages";
 import rootReducer, { IRootState } from "./reducers";
+import Routes from "./Routes";
 
 let middleware = applyMiddleware(thunk);
 
@@ -22,7 +23,9 @@ class Root extends React.Component {
   public render() {
     return (
       <Provider store={store}>
-        <HomePages />
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter>
       </Provider>
     );
   }
