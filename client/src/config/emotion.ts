@@ -21,15 +21,27 @@ export const theme = {
 // TODO: resolve this problem
 // tslint:disable-next-line:no-unused-expression
 injectGlobal`
+  * {
+    outline: none;
+  }
+
   html,
   body {
-    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    color: #000000;
+    line-height: 1.3;
+    min-height: 100vh;
     margin: 0;
-    padding: 0;
-    background-color: inherit;
+    outline: none;
   }
 
   #root {
     height: 100%;
+  }
+
+  a {
+    display: inline-block;
+    text-decoration: none;
+    transition: all 0.3s;
   }
 `;
