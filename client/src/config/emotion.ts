@@ -4,8 +4,6 @@ export const theme = {
   colors: {
     background: "#FBFBFB",
     error: "#FF3433",
-    hint: "#DEE3EC",
-    main: "#32325D",
     primary: "#1888FE",
     secondary: "#C7CCD7"
   },
