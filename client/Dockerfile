@@ -7,10 +7,11 @@ RUN yarn
 COPY . ./
 RUN yarn build
 
-# Stage 2 - the production environment
+# Stage 2 - nginx server
 FROM zzswang/docker-nginx-react:latest as proxy-client
 
 COPY --from=build-client ./usr/src/app/build .
 
 ## Suppose your app is in the dist directory.
-COPY ./ /app
+COPY . /app
+
