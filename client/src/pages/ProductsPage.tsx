@@ -9,7 +9,7 @@ class ProductsPage extends React.Component {
   public render() {
     return (
       <Container>
-        <h1>MultiMask store is coming</h1>
+        <h1>Store is coming</h1>
       </Container>
     );
   }
