@@ -1,3 +1,5 @@
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
 import { connectRouter, routerMiddleware } from "connected-react-router";
 import { ConnectedRouter } from "connected-react-router";
 import { ThemeProvider } from "emotion-theming";
@@ -9,6 +11,8 @@ import { applyMiddleware, compose, createStore } from "redux";
 import { theme } from "./config/emotion";
 import rootReducer from "./reducers";
 import Routes from "./routes";
+
+library.add(faEnvelope, faKey);
 
 const history = createBrowserHistory();
 

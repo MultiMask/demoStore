@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "react-emotion";
+import Footer from "./Footer";
 import Header from "./Header";
 
 class Layout extends React.Component {
@@ -9,6 +10,7 @@ class Layout extends React.Component {
       <Container>
         <Header />
         <Content>{children}</Content>
+        <Footer />
       </Container>
     );
   }
@@ -24,8 +26,11 @@ const Container = styled("div")`
 `;
 
 const Content = styled("main")`
-  flex: 1;
-  background: white;
+  width: 100%;
+  flex: 1 0 auto;
+  padding: 40px 0;
+  box-sizing: border-box;
+  min-height: 700px;
 `;
 
 export default Layout;
