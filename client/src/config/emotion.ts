@@ -21,6 +21,8 @@ export const theme = {
 // TODO: resolve this problem
 // tslint:disable-next-line:no-unused-expression
 injectGlobal`
+  @import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900');
+
   * {
     outline: none;
   }

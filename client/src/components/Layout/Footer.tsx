@@ -39,6 +39,10 @@ const Inner = styled("div")`
   margin: 0 auto;
   box-sizing: border-box;
   padding: 0 30px;
+
+  @media (max-width: 900px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 const Copyrigth = styled("span")`
