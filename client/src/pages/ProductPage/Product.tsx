@@ -1,5 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 import styled, { css } from "react-emotion";
+import OrderForm from './OrderForm'
 
 const Product = () => (
   <Container>
@@ -8,27 +9,23 @@ const Product = () => (
       <Name>Sushi T-Shirt</Name>
       <Price>0.05 ETH</Price>
       <Description>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur.
       </Description>
       <OrderContainer>
         <Counter>
-          <li  className={styles.marginRight}>
-            <CounterButton>
-              -
-            </CounterButton>
+          <li className={styles.marginRight}>
+            <CounterButton>-</CounterButton>
           </li>
-          <li className={styles.counter}>
-            1
-          </li>
+          <li className={styles.counter}>1</li>
           <li>
-            <CounterButton>
-              +
-            </CounterButton>
+            <CounterButton>+</CounterButton>
           </li>
         </Counter>
-        <OrderButton>
-          Order
-        </OrderButton>
+        <OrderForm/>
       </OrderContainer>
     </Info>
   </Container>
@@ -47,7 +44,7 @@ const styles = {
   marginRight: css`
     margin-right: 5px;
   `
-}
+};
 
 const Container = styled("div")`
   display: flex;
@@ -174,21 +171,5 @@ const CounterButton = styled("button")`
     background: #3b51b0;
   }
 `;
-
-const OrderButton = styled('button')`
-  color: #fff;
-  font-size: 24px;
-  font-weight: 500;
-  background: linear-gradient(to right, #ff7e1f, #ff5c4a);
-  border-radius: 5px;
-  padding: 9.5px 32px;
-  font-family: 'Montserrat', sans-serif;
-  line-height: 1.3;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
-`
 
 export default Product;

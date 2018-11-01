@@ -1,18 +1,17 @@
 import * as React from "react";
 import styled from "react-emotion";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Header = () => (
   <Container>
     <Inner>
-      <div>
-        <StyledLink to="#">
-          <Image src="./logo.png" />
-          MultiMask
-        </StyledLink>
-      </div>
-      <StatusBar>
-        `
+    <div>
+    <StyledLink to="#">
+      <Image src="./logo.png" />
+      MultiMask
+    </StyledLink>
+  </div>
+      <StatusBar>`
         <Currency>
           Currency: <b>ETH</b>
         </Currency>
@@ -47,21 +46,6 @@ const Inner = styled("div")`
   }
 `;
 
-const StyledLink = styled(Link)`
-  display: inline-flex;
-  align-items: center;
-  color: #fff;
-  font-weight: 500;
-  font-size: 24px;
-`;
-
-const Image = styled("img")`
-  display: block;
-  margin-right: 17px;
-  max-width: 100%;
-  border-style: none;
-`;
-
 const StatusBar = styled("div")`
   display: inline-flex;
   align-items: center;
@@ -93,6 +77,21 @@ const Status = styled("div")`
     top: 5px;
     background: #0cf0c8;
   }
+`;
+
+const StyledLink = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  color: #fff;
+  font-weight: 500;
+  font-size: 24px;
+`;
+
+const Image = styled("img")`
+  display: block;
+  margin-right: 17px;
+  max-width: 100%;
+  border-style: none;
 `;
 
 export default Header;
