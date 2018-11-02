@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Layout from "./components/Layout/index";
 import { ProductsPage } from "./pages";
 
-const Routes = () => {
+const Routes: React.StatelessComponent<{}> = () => {
   return (
     <Layout>
       <Switch>

@@ -1,8 +1,22 @@
 import * as React from "react";
 import styled, { css } from "react-emotion";
-import OrderForm from './OrderForm'
+import OrderForm from "./OrderForm";
+import { IOrder } from "./ProductsPage";
 
-const Product = () => (
+export interface IProduct {
+  order: IOrder;
+  onChangeAmount: (value: number) => void;
+  amount: number;
+}
+
+const handleOnClick = (
+  onChange: (value: number) => void,
+  value: number
+) => () => {
+  onChange(value);
+};
+
+const Product: React.SFC<IProduct> = ({ order, onChangeAmount, amount }) => (
   <Container>
     <Image src="./product-detail-img.png" />
     <Info>
@@ -18,14 +32,18 @@ const Product = () => (
       <OrderContainer>
         <Counter>
           <li className={styles.marginRight}>
-            <CounterButton>-</CounterButton>
+            <CounterButton onClick={handleOnClick(onChangeAmount, -1)}>
+              -
+            </CounterButton>
           </li>
-          <li className={styles.counter}>1</li>
+          <li className={styles.counter}>{amount}</li>
           <li>
-            <CounterButton>+</CounterButton>
+            <CounterButton onClick={handleOnClick(onChangeAmount, 1)}>
+              +
+            </CounterButton>
           </li>
         </Counter>
-        <OrderForm/>
+        <OrderForm initialValues={order} />
       </OrderContainer>
     </Info>
   </Container>
@@ -40,6 +58,8 @@ const styles = {
     margin-right: 5px;
     min-height: 50px;
     padding: 0 20px;
+    min-width: 30px;
+    text-align: center;
   `,
   marginRight: css`
     margin-right: 5px;
@@ -162,8 +182,7 @@ const CounterButton = styled("button")`
   text-transform: none;
   font-family: inherit;
   &:hover,
-  :active,
-  :focus {
+  :active {
     outline: 0;
     outline-offset: 0;
     border-color: #3b51b0;

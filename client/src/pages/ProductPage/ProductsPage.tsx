@@ -1,22 +1,65 @@
 import * as React from "react";
 import styled from "react-emotion";
-import { Link } from "react-router-dom";
-import Product from './Product'
+import { Link, RouteComponentProps } from "react-router-dom";
+import Product from "./Product";
 
-class ProductsPage extends React.Component {
+export interface IOrder {
+  firstName: string;
+  lastName: string;
+  streetAddress: string;
+  zipCode: number;
+  city: string;
+  country: string;
+  email: string;
+  phone: string;
+}
+export interface IProductsPageState {
+  order: IOrder;
+  amount: number;
+}
+
+class ProductsPage extends React.Component<
+  RouteComponentProps<{}>,
+  IProductsPageState
+> {
+  public state = {
+    amount: 1,
+    order: {
+      city: "",
+      country: "",
+      email: "",
+      firstName: "",
+      lastName: "",
+      phone: "",
+      streetAddress: "",
+      zipCode: 0
+    }
+  };
+
+  public handleChangeAmount = (value: number) => {
+    const { amount } = this.state;
+    if (amount + value > 0) {
+      this.setState({ amount: amount + value });
+    }
+  };
+
   public render() {
+    const { order, amount } = this.state;
     return (
       <Container>
         <Header>
           <HeaderTitle>Product detail page</HeaderTitle>
           <StyledLink to="#">FAQ</StyledLink>
         </Header>
-        <Product/>
+        <Product
+          order={order}
+          onChangeAmount={this.handleChangeAmount}
+          amount={amount}
+        />
       </Container>
     );
   }
 }
-
 
 const Container = styled("div")`
   max-width: 1230px;
@@ -24,7 +67,7 @@ const Container = styled("div")`
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0 30px;
-  
+
   @media (max-width: 500px) {
     padding: 0 15px;
   }

@@ -1,12 +1,12 @@
-import * as React from 'react';
-import styled from 'react-emotion';
+import * as React from "react";
+import styled from "react-emotion";
 
 const ProgressBar = () => {
   return (
     <Container>
       <Bar>
-        <Line/>
-        <Indicator/>
+        <Line />
+        <Indicator />
       </Bar>
       <DescriptionsLine>
         <Item>Order received</Item>
@@ -15,14 +15,14 @@ const ProgressBar = () => {
       </DescriptionsLine>
     </Container>
   );
-}
+};
 
-const Container = styled('div')`
+const Container = styled("div")`
   margin-bottom: 45px;
   margin-top: 25px;
-`
+`;
 
-const Bar = styled('div')`
+const Bar = styled("div")`
   max-width: 630px;
   position: relative;
   height: 8px;
@@ -52,18 +52,18 @@ const Bar = styled('div')`
     z-index: 2;
     right: -15px;
   }
-`
+`;
 
-const Line = styled('div')`
+const Line = styled("div")`
   background: linear-gradient(to right, #ff7e1f, #ff5e48);
   position: absolute;
   left: 0;
   top: 0;
   height: 100%;
   width: 50%;
-`
+`;
 
-const Indicator = styled('div')`
+const Indicator = styled("div")`
   position: absolute;
   left: 50%;
   top: 50%;
@@ -82,11 +82,11 @@ const Indicator = styled('div')`
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%);
   }
-`
+`;
 
-const DescriptionsLine =  styled('ul')`
+const DescriptionsLine = styled("ul")`
   max-width: 730px;
   margin: 0 auto;
   justify-content: space-between;
@@ -95,9 +95,9 @@ const DescriptionsLine =  styled('ul')`
   list-style-type: none;
   display: flex;
   align-items: flex-start;
-`
+`;
 
-const Item = styled('li')`
+const Item = styled("li")`
   font-size: 18px;
   font-weight: 500;
   &:nth-child(3) {
@@ -114,6 +114,5 @@ const Item = styled('li')`
     max-width: 140px;
     width: 100%;
   }
-    
-`
+`;
 export default ProgressBar;
