@@ -3,9 +3,10 @@ import * as React from "react";
 import styled from "react-emotion";
 import { Link } from "react-router-dom";
 import Modal from "src/components/Modal/Modal";
-import Button from "../../components/Button";
-import ProgressBar from "../../components/ProgressBar/ProgressBar";
-import { IOrder } from "./ProductsPage";
+import Button from "../../../components/Button";
+import ProgressBar from "../../../components/ProgressBar/ProgressBar";
+import { IOrder } from "../ProductsPage";
+import { validate } from "./validate";
 
 export interface IOrderForm {
   initialValues: IOrder;
@@ -15,7 +16,7 @@ export interface IMyFormValues {
   firstName: string;
 }
 
-const step = 0
+const step = 0;
 
 const OrderForm: React.SFC<IOrderForm> = ({ initialValues }) => (
   <Modal buttonName="Order">
@@ -28,9 +29,10 @@ const OrderForm: React.SFC<IOrderForm> = ({ initialValues }) => (
     <StepDescription>
       Order #23409232 submitted. Wait for confirmation.
     </StepDescription>
-    <ProgressBar step={step}/>
+    <ProgressBar step={step} />
     <Formik
       initialValues={initialValues}
+      validate={validate}
       onSubmit={(values: IOrder) => alert(JSON.stringify(values))}
       render={(formikBag: FormikProps<IOrder>) => (
         <Form>

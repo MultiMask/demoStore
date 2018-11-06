@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled, { css } from "react-emotion";
-import OrderForm from "./OrderForm";
+import OrderForm from "./OrderForm/OrderForm";
 import { IOrder } from "./ProductsPage";
 
 export interface IProduct {
