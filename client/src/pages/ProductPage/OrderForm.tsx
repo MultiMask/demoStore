@@ -15,6 +15,8 @@ export interface IMyFormValues {
   firstName: string;
 }
 
+const step = 0
+
 const OrderForm: React.SFC<IOrderForm> = ({ initialValues }) => (
   <Modal buttonName="Order">
     <div style={{ textAlign: "center" }}>
@@ -26,7 +28,7 @@ const OrderForm: React.SFC<IOrderForm> = ({ initialValues }) => (
     <StepDescription>
       Order #23409232 submitted. Wait for confirmation.
     </StepDescription>
-    <ProgressBar />
+    <ProgressBar step={step}/>
     <Formik
       initialValues={initialValues}
       onSubmit={(values: IOrder) => alert(JSON.stringify(values))}
