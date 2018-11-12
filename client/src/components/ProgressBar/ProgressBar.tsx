@@ -1,17 +1,17 @@
 import * as React from "react";
 import styled from "react-emotion";
-import {getWidth} from './stagesConditionHelper'
+import { getWidth } from "./stagesConditionHelper";
 
 export interface IProgressBar {
-  step: number
+  step: number;
 }
 
-const ProgressBar: React.SFC<IProgressBar> = ({step}) => {
+const ProgressBar: React.SFC<IProgressBar> = ({ step }) => {
   return (
     <Container>
       <Bar>
-        <Line step={step}/>
-        <Indicator step={step}/>
+        <Line step={step} />
+        <Indicator step={step} />
       </Bar>
       <DescriptionsLine>
         <Item>Order received</Item>
@@ -60,7 +60,7 @@ const Bar = styled("div")`
 `;
 
 interface ILineProps {
-  step: number
+  step: number;
 }
 
 const Line = styled("div")`
@@ -70,16 +70,17 @@ const Line = styled("div")`
   top: 0;
   height: 100%;
   width: ${(props: ILineProps) => getWidth(props.step)};
+  transition: all 0.5s ease;
 `;
 
 interface IIndicatorProps {
-  step: number
+  step: number;
 }
-
 
 const Indicator = styled("div")`
   position: absolute;
   left: ${(props: IIndicatorProps) => getWidth(props.step)};
+  transition: all 0.5s ease;
   top: 50%;
   transform: translate(-50%, -50%);
   width: 50px;

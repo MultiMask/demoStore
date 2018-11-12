@@ -7,6 +7,8 @@ export interface IProduct {
   order: IOrder;
   onChangeAmount: (value: number) => void;
   amount: number;
+  onSubmitForm: (value: IOrder) => void;
+  formStep: number;
 }
 
 const handleOnClick = (
@@ -16,7 +18,13 @@ const handleOnClick = (
   onChange(value);
 };
 
-const Product: React.SFC<IProduct> = ({ order, onChangeAmount, amount }) => (
+const Product: React.SFC<IProduct> = ({
+  order,
+  onChangeAmount,
+  amount,
+  onSubmitForm,
+  formStep
+}) => (
   <Container>
     <Image src="./product-detail-img.png" />
     <Info>
@@ -43,7 +51,11 @@ const Product: React.SFC<IProduct> = ({ order, onChangeAmount, amount }) => (
             </CounterButton>
           </li>
         </Counter>
-        <OrderForm initialValues={order} />
+        <OrderForm
+          initialValues={order}
+          onSubmit={onSubmitForm}
+          step={formStep}
+        />
       </OrderContainer>
     </Info>
   </Container>

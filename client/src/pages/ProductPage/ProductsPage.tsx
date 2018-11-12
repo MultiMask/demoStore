@@ -16,6 +16,7 @@ export interface IOrder {
 export interface IProductsPageState {
   order: IOrder;
   amount: number;
+  formStep: number;
 }
 
 class ProductsPage extends React.Component<
@@ -24,6 +25,7 @@ class ProductsPage extends React.Component<
 > {
   public state = {
     amount: 1,
+    formStep: 0,
     order: {
       city: "",
       country: "",
@@ -43,8 +45,20 @@ class ProductsPage extends React.Component<
     }
   };
 
+  public handleSubmitForm = async (values: IOrder) => {
+    this.setState({ formStep: 1 });
+    const accounts = await window.crypto3.getIdentity();
+
+    // const hashTx = await window.crypto3.pay();
+
+    // TODO: save data to back end
+
+    // tslint:disable-next-line:no-console
+    console.log("accounts:", accounts);
+  };
+
   public render() {
-    const { order, amount } = this.state;
+    const { order, amount, formStep } = this.state;
     return (
       <Container>
         <Header>
@@ -55,6 +69,8 @@ class ProductsPage extends React.Component<
           order={order}
           onChangeAmount={this.handleChangeAmount}
           amount={amount}
+          onSubmitForm={this.handleSubmitForm}
+          formStep={formStep}
         />
       </Container>
     );

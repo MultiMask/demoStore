@@ -10,15 +10,19 @@ import { validate } from "./validate";
 
 export interface IOrderForm {
   initialValues: IOrder;
+  onSubmit: (values: IOrder) => void;
+  step: number;
 }
 
 export interface IMyFormValues {
   firstName: string;
 }
 
-const step = 0;
-
-const OrderForm: React.SFC<IOrderForm> = ({ initialValues }) => (
+const OrderForm: React.SFC<IOrderForm> = ({
+  initialValues,
+  onSubmit,
+  step
+}) => (
   <Modal buttonName="Order">
     <div style={{ textAlign: "center" }}>
       <StyledLink to="#">
@@ -33,7 +37,7 @@ const OrderForm: React.SFC<IOrderForm> = ({ initialValues }) => (
     <Formik
       initialValues={initialValues}
       validate={validate}
-      onSubmit={(values: IOrder) => alert(JSON.stringify(values))}
+      onSubmit={onSubmit}
       render={(formikBag: FormikProps<IOrder>) => (
         <Form>
           <Field
@@ -101,7 +105,7 @@ const OrderForm: React.SFC<IOrderForm> = ({ initialValues }) => (
             )}
           />
           <Footer>
-            <Button>Ok</Button>
+            <Button type="submit">Ok</Button>
           </Footer>
         </Form>
       )}
