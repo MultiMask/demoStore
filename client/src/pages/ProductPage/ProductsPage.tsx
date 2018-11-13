@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "react-emotion";
 import { Link, RouteComponentProps } from "react-router-dom";
+import { PAYMENT_DATA } from '../../config/payment'
 import Product from "./Product";
 
 export interface IOrder {
@@ -47,14 +48,11 @@ class ProductsPage extends React.Component<
 
   public handleSubmitForm = async (values: IOrder) => {
     this.setState({ formStep: 1 });
-    const accounts = await window.crypto3.getIdentity();
+    const payParams = await window.crypto3.getIdentity(PAYMENT_DATA);
 
-    // const hashTx = await window.crypto3.pay();
-
+    const hashTx = await window.crypto3.pay(payParams);
     // TODO: save data to back end
 
-    // tslint:disable-next-line:no-console
-    console.log("accounts:", accounts);
   };
 
   public render() {
