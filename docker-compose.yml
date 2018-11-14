@@ -10,6 +10,8 @@ services:
       - 3000:3000
     environment:
       - MULTIMASK_ENV=dev
+    volumes:
+      - ./client:/usr/src/app
     labels:
       - "traefik.port=3000"
       - "traefik.backend=client"
@@ -21,6 +23,8 @@ services:
       - 8000:8000
     environment:
       - MULTIMASK_ENV=dev
+    volumes:
+      - ./api:/usr/src/app
     labels:
       - "traefik.backend=api"
       - "traefik.port=8000"
@@ -29,7 +33,7 @@ services:
       - "redis:redis"
   traefik:
     image: traefik
-    command: --web --docker --docker.domain=docker.localhost --logLevel=DEBUG
+    command: --web --docker --docker.domain=docker.localhost
     ports:
       - "80:80"
       - "8080:8080"

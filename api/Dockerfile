@@ -1,11 +1,11 @@
-FROM node:boron
+FROM node:latest
 
-RUN mkdir -p /data
-WORKDIR /data
+RUN mkdir -p /usr/src/app
 
-# Bundle app source
-COPY package.json /data
-RUN yarn install
-COPY index.js /data 
+WORKDIR /usr/src/app
+COPY . /usr/src/app
+
+RUN yarn
+
 EXPOSE  8000
-CMD ["node", "/data/index.js"]
+CMD ["yarn" ,"start"]
