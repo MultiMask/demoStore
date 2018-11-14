@@ -10,6 +10,7 @@ export interface IProduct {
   onSubmitForm: (value: IOrder) => void;
   formStep: number;
   hashTx: string;
+  error: string;
 }
 
 const handleOnClick = (
@@ -25,7 +26,8 @@ const Product: React.SFC<IProduct> = ({
   amount,
   onSubmitForm,
   formStep,
-  hashTx
+  hashTx,
+  error,
 }) => (
   <Container>
     <Image src="./product-detail-img.png" />
@@ -58,6 +60,7 @@ const Product: React.SFC<IProduct> = ({
           onSubmit={onSubmitForm}
           step={formStep}
           hashTx={hashTx}
+          error={error}
         />
       </OrderContainer>
     </Info>

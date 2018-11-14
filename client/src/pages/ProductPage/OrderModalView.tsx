@@ -11,6 +11,7 @@ export interface IOrderModalView {
   onSubmit: (values: IOrder) => void;
   step: number;
   hashTx: string;
+  error: string;
 }
 
 export interface IMyFormValues {
@@ -19,7 +20,7 @@ export interface IMyFormValues {
 
 class OrderModalView extends React.Component<IOrderModalView> {
   public render() {
-    const { step, initialValues, onSubmit, hashTx } = this.props;
+    const { step, initialValues, onSubmit, hashTx, error } = this.props;
     const steps = [
       <OrderForm
         key="order-form"
@@ -40,10 +41,11 @@ class OrderModalView extends React.Component<IOrderModalView> {
           </StyledLink>
         </div>
         <StepDescription>
-          Order #23409232 submitted. Wait for confirmation.
+          Order {initialValues.id} submitted. Wait for confirmation.
         </StepDescription>
         <ProgressBar step={step} />
-        {steps[step]}
+        {!error && steps[step]}
+        {error && error}
       </Modal>
     );
   }

@@ -87,7 +87,7 @@ const Indicator = styled("div")`
   height: 50px;
   border-radius: 50%;
   background: linear-gradient(to right, #ff7e1f, #ff5e48);
-  z-index: 2;
+  z-index: 3;
   &::before {
     content: "";
     width: 15px;

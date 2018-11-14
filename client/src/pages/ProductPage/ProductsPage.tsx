@@ -1,3 +1,4 @@
+import axios from 'axios';
 import * as React from "react";
 import styled from "react-emotion";
 import { Link, RouteComponentProps } from "react-router-dom";
@@ -21,6 +22,7 @@ export interface IProductsPageState {
   amount: number;
   formStep: number;
   hashTx: string;
+  error: string;
 }
 
 class ProductsPage extends React.Component<
@@ -29,6 +31,7 @@ class ProductsPage extends React.Component<
 > {
   public state = {
     amount: 1,
+    error: '',
     formStep: 0,
     hashTx: "",
     order: {
@@ -36,7 +39,7 @@ class ProductsPage extends React.Component<
       country: "",
       email: "",
       firstName: "",
-      id: '_' + Math.random().toString(36).substr(2, 9),
+      id: Math.random().toString(36).substr(2, 9),
       lastName: "",
       phone: "",
       streetAddress: "",
@@ -54,23 +57,23 @@ class ProductsPage extends React.Component<
   public handleSubmitForm = async (values: IOrder) => {
     try {
       this.setState({ formStep: 1 });
-      const payParams = await window.crypto3.getIdentity(PAYMENT_DATA);
+      await axios.post('/api/orders', values)
 
+      const payParams = await window.crypto3.getIdentity(PAYMENT_DATA);
       const result = await window.crypto3.pay(payParams);
       if (result.error) {
         throw result.error;
       }
       this.setState({ hashTx: result.txHash, formStep: 2 });
     } catch (error) {
+      this.setState({error: error.message})
       // tslint:disable-next-line:no-console
       console.log(error);
     }
-
-    // TODO: save data to back end
   };
 
   public render() {
-    const { order, amount, formStep, hashTx } = this.state;
+    const { order, amount, formStep, hashTx, error } = this.state;
     return (
       <Container>
         <Header>
@@ -84,6 +87,7 @@ class ProductsPage extends React.Component<
           onSubmitForm={this.handleSubmitForm}
           formStep={formStep}
           hashTx={hashTx}
+          error={error}
         />
       </Container>
     );
