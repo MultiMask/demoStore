@@ -1,15 +1,19 @@
 version: "3.6"
 
 services:
+  redis:
+    image: redis
   client:
     container_name: client
     build: ./client
     ports:
-      - 7000:80
-    volumes:
-      - ./client:/usr/src/app
+      - 3000:3000
     environment:
       - MULTIMASK_ENV=dev
+    labels:
+      - "traefik.port=3000"
+      - "traefik.backend=client"
+      - "traefik.frontend.rule=PathPrefixStrip:/"
   api:
     container_name: api
     build: ./api
@@ -17,14 +21,19 @@ services:
       - 8000:8000
     environment:
       - MULTIMASK_ENV=dev
-  proxy:
-    container_name: proxy
-    build: ./proxy
+    labels:
+      - "traefik.backend=api"
+      - "traefik.port=8000"
+      - "traefik.frontend.rule=PathPrefixStrip:/api"
+    links:
+      - "redis:redis"
+  traefik:
+    image: traefik
+    command: --web --docker --docker.domain=docker.localhost --logLevel=DEBUG
     ports:
       - "80:80"
+      - "8080:8080"
       - "443:443"
-    depends_on:
-      - client
-      - api
     volumes:
-      - ./client:/var/lib/src/app/build
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /dev/null:/traefik.toml
