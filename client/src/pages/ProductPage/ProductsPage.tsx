@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "react-emotion";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { PAYMENT_DATA } from '../../config/payment'
+import { PAYMENT_DATA } from "../../config/payment";
 import Product from "./Product";
 
 export interface IOrder {
@@ -13,11 +13,14 @@ export interface IOrder {
   country: string;
   email: string;
   phone: string;
+  id: string;
 }
+
 export interface IProductsPageState {
   order: IOrder;
   amount: number;
   formStep: number;
+  hashTx: string;
 }
 
 class ProductsPage extends React.Component<
@@ -27,11 +30,13 @@ class ProductsPage extends React.Component<
   public state = {
     amount: 1,
     formStep: 0,
+    hashTx: "",
     order: {
       city: "",
       country: "",
       email: "",
       firstName: "",
+      id: '_' + Math.random().toString(36).substr(2, 9),
       lastName: "",
       phone: "",
       streetAddress: "",
@@ -47,16 +52,25 @@ class ProductsPage extends React.Component<
   };
 
   public handleSubmitForm = async (values: IOrder) => {
-    this.setState({ formStep: 1 });
-    const payParams = await window.crypto3.getIdentity(PAYMENT_DATA);
+    try {
+      this.setState({ formStep: 1 });
+      const payParams = await window.crypto3.getIdentity(PAYMENT_DATA);
 
-    const hashTx = await window.crypto3.pay(payParams);
+      const result = await window.crypto3.pay(payParams);
+      if (result.error) {
+        throw result.error;
+      }
+      this.setState({ hashTx: result.txHash, formStep: 2 });
+    } catch (error) {
+      // tslint:disable-next-line:no-console
+      console.log(error);
+    }
+
     // TODO: save data to back end
-
   };
 
   public render() {
-    const { order, amount, formStep } = this.state;
+    const { order, amount, formStep, hashTx } = this.state;
     return (
       <Container>
         <Header>
@@ -69,6 +83,7 @@ class ProductsPage extends React.Component<
           amount={amount}
           onSubmitForm={this.handleSubmitForm}
           formStep={formStep}
+          hashTx={hashTx}
         />
       </Container>
     );

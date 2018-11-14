@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled, { css } from "react-emotion";
-import OrderForm from "./OrderForm/OrderForm";
+import OrderModalView from "./OrderModalView";
 import { IOrder } from "./ProductsPage";
 
 export interface IProduct {
@@ -9,6 +9,7 @@ export interface IProduct {
   amount: number;
   onSubmitForm: (value: IOrder) => void;
   formStep: number;
+  hashTx: string;
 }
 
 const handleOnClick = (
@@ -23,7 +24,8 @@ const Product: React.SFC<IProduct> = ({
   onChangeAmount,
   amount,
   onSubmitForm,
-  formStep
+  formStep,
+  hashTx
 }) => (
   <Container>
     <Image src="./product-detail-img.png" />
@@ -51,10 +53,11 @@ const Product: React.SFC<IProduct> = ({
             </CounterButton>
           </li>
         </Counter>
-        <OrderForm
+        <OrderModalView
           initialValues={order}
           onSubmit={onSubmitForm}
           step={formStep}
+          hashTx={hashTx}
         />
       </OrderContainer>
     </Info>
